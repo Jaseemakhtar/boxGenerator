@@ -1,3 +1,4 @@
+console.log("Connected");
 var btnAddOne = document.querySelector("#rowOne img"),
     btnAddTwo = document.querySelector("#rowTwo img"),
     btnAddThree = document.querySelector("#rowThree img"),
@@ -80,13 +81,31 @@ function generateNums(){
     rowThreeValues = [];
 
     for(var i = 0; i < rowOneInputs.length; i++){
-        rowOneValues.push(rowOneInputs[i].value);
+        var sin = rowOneInputs[i].value;
+        sin = sin.trim();
+        if(sin == ""){
+            //
+        }else{
+            rowOneValues.push(sin);
+        }
     }
     for(var i = 0; i < rowTwoInputs.length; i++){
-        rowTwoValues.push(rowTwoInputs[i].value);
+        var sin = rowTwoInputs[i].value;
+        sin = sin.trim();
+        if(sin == ""){
+            //
+        }else{
+            rowTwoValues.push(rowTwoInputs[i].value);
+        }
     }
     for(var i = 0; i < rowThreeInputs.length; i++){
-        rowThreeValues.push(rowThreeInputs[i].value);
+        var sin = rowThreeInputs[i].value;
+        sin = sin.trim();
+        if(sin == ""){
+            //
+        }else{
+            rowThreeValues.push(rowThreeInputs[i].value);
+        }
     }
     var counter = 0;
     for(var i = 0; i < rowOneValues.length; i++){
@@ -100,7 +119,8 @@ function generateNums(){
         }
     }
     var str = txtOutput.value;
-    //txtOutput.value = str.substring(str.lastIndexOf(","), str.length);
+    str = str.substring(0, str.lastIndexOf(",")) + ".";
+    txtOutput.value = str;
     console.log(counter);
 
 }
