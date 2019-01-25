@@ -7,14 +7,17 @@ var btnAddOne = document.querySelector("#rowOne img"),
     rowOne = document.querySelector("#rowOne"),
     rowTwo = document.querySelector("#rowTwo"),
     rowThree = document.querySelector("#rowThree")
-    rowOneInputs = [],
-    rowTwoInputs = [],
-    rowThreeInputs = [],
+    rowOneInputs = document.querySelectorAll(".row1"),
+    rowTwoInputs = document.querySelectorAll(".row2"),
+    rowThreeInputs = document.querySelectorAll(".row3"),
     btnGenerate = document.querySelector(".btnGenerate"),
-    txtOutput = document.querySelector("#txtOutput");
+    txtOutput = document.querySelector("#txtOutput"),
+    rowOneValues = [],
+    rowTwoValues = [],
+    rowThreeValues = [];
 
 btnGenerate.addEventListener('click', function(){
-    console.log("generate");
+    generateNums();
 });
 
 btnAddOne.addEventListener('click',function(){
@@ -35,25 +38,25 @@ function add(whichRow){
         case 1:
             if(rowOneCount >= 10)
                 return;
-
-            rowOneInputs = document.querySelectorAll(".row1");
+            
             var newInput = document.createElement("input");
             newInput.type = "text";
             newInput.classList.add("row1");
             rowOne.insertBefore(newInput, btnAddOne);
             rowOneCount++;
+            rowOneInputs = document.querySelectorAll(".row1");
         break;
 
         case 2:
             if(rowTwoCount >= 10)
                 return;
-
-            rowTwoInputs = document.querySelectorAll(".row2");
+            
             var newInput = document.createElement("input");
             newInput.type = "text";
             newInput.classList.add("row2");
             rowTwo.insertBefore(newInput, btnAddTwo);
             rowTwoCount++;
+            rowTwoInputs = document.querySelectorAll(".row2");
         break;
 
         case 3:
@@ -61,12 +64,43 @@ function add(whichRow){
             if(rowThreeCount >= 10)
                 return;
 
-            rowThreeInputs = document.querySelectorAll(".row3");
             var newInput = document.createElement("input");
             newInput.type = "text";
             newInput.classList.add("row3");
             rowThree.insertBefore(newInput, btnAddThree);
             rowThreeCount++;
+            rowThreeInputs = document.querySelectorAll(".row3");
         break;
     }
+}
+
+function generateNums(){
+    rowOneValues = [];
+    rowTwoValues = [];
+    rowThreeValues = [];
+
+    for(var i = 0; i < rowOneInputs.length; i++){
+        rowOneValues.push(rowOneInputs[i].value);
+    }
+    for(var i = 0; i < rowTwoInputs.length; i++){
+        rowTwoValues.push(rowTwoInputs[i].value);
+    }
+    for(var i = 0; i < rowThreeInputs.length; i++){
+        rowThreeValues.push(rowThreeInputs[i].value);
+    }
+    var counter = 0;
+    for(var i = 0; i < rowOneValues.length; i++){
+        for(var j = 0; j < rowTwoValues.length; j++){
+            for(var k = 0; k < rowThreeValues.length; k++){
+                var str = rowOneValues[i] + "" + rowTwoValues[j] + "" + rowThreeValues[k];
+                txtOutput.value = txtOutput.value + str + ", ";
+                console.log(str);
+                counter++;
+            }
+        }
+    }
+    var str = txtOutput.value;
+    //txtOutput.value = str.substring(str.lastIndexOf(","), str.length);
+    console.log(counter);
+
 }
